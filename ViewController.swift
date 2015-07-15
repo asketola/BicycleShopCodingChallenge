@@ -14,10 +14,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var openingMountainBikeImage: UIImageView!
     @IBOutlet weak var usernameTextFIeld: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    @IBOutlet weak var loginButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.openingMountainBikeImage.alpha = 0
+        self.bicycleShopNameText.alpha = 0
+        self.usernameTextFIeld.alpha = 0
+        self.passwordTextField.alpha = 0
+        self.loginButton.alpha = 0
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animateWithDuration(2.0, animations: { () -> Void in
+            self.openingMountainBikeImage.alpha = 1.0
+            self.bicycleShopNameText.alpha = 1.0
+            self.usernameTextFIeld.alpha = 1.0
+            self.passwordTextField.alpha = 1.0
+            self.loginButton.alpha = 1.0
+        })
     }
 
     override func didReceiveMemoryWarning() {

@@ -11,6 +11,8 @@ import UIKit
 class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var storeNameText: UILabel!
+    @IBOutlet weak var storeBikeTypeLabel: UILabel!
+    
     @IBOutlet weak var typesOfBikesTableView: UITableView!
     
     var bikeObjects = NSMutableArray()
@@ -22,6 +24,10 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.storeNameText.alpha = 0
+        self.storeBikeTypeLabel.alpha = 0
+        self.typesOfBikesTableView.alpha = 0
+        
         var nib = UINib(nibName: "BicycleTableViewCell", bundle: nil)
         typesOfBikesTableView.registerNib(nib, forCellReuseIdentifier: "cell")
         
@@ -29,6 +35,18 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animateWithDuration(2.0, animations: { () -> Void in
+        self.storeNameText.alpha = 1.0
+        self.storeBikeTypeLabel.alpha = 1.0
+        self.typesOfBikesTableView.alpha = 1.0
+        })
+    }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -54,8 +72,6 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     
-    
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.bikeObject = santaCruzBikeArray[indexPath.row]
         println("You selected a cell #\(indexPath.row)!")
@@ -67,7 +83,7 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("We got here")
+        println("We got to the prepare for Segue")
             if segue.identifier == "SHOW_BIKE_DETAIL" {
             
             let detailedVC = segue.destinationViewController as! ProductDetailsViewController
