@@ -28,6 +28,17 @@ class ViewController: UIViewController {
     @IBAction func loginButtonPressed(sender: AnyObject) {
         // code to servers to login
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SHOW_BIKES_FOR_SALE" {
+            
+            
+            
+            
+            
+            let bikesForSaleVC = segue.destinationViewController as! BicycleTableView
+        }
+    }
 
 }
 

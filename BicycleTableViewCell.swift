@@ -11,7 +11,7 @@ import UIKit
 class BicycleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var bikeImage: UIImageView!
-    @IBOutlet weak var bikeLogoNameText: UILabel!
+    @IBOutlet weak var bikeBrandNameText: UILabel!
     @IBOutlet weak var bikeModelText: UILabel!
     @IBOutlet weak var bikepriceText: UILabel!
     
