@@ -39,7 +39,7 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animateWithDuration(2.0, animations: { () -> Void in
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
         self.storeNameText.alpha = 1.0
         self.storeBikeTypeLabel.alpha = 1.0
         self.typesOfBikesTableView.alpha = 1.0
