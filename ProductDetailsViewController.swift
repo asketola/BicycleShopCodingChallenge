@@ -17,20 +17,17 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var bicyclePriceText: UILabel!
     @IBOutlet weak var productDescriptionTextView: UITextView!
     
-    var bicycleData = NSDictionary()
+    var bicycleData: PFObject!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        brandNameText.text = bicycleData["bikeBrandNameText"] as? String
-        bicycleModelText.text = bicycleData["bikeModelText"] as? String
-        bicyclePriceText.text = bicycleData["bikePriceText"] as? String
-        
-        // Note: this description would be as part of the Dictionary that is created for each product, but I didn't include it because its just this filler text
-        productDescriptionTextView.text = "Description: Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."
-        
-        let bikeImageUIimage = bicycleData["bikeImage"] as! String
+        brandNameText.text = bicycleData["brandName"] as? String
+        bicycleModelText.text = bicycleData["modelName"] as? String
+        bicyclePriceText.text = bicycleData["price"] as? String
+        productDescriptionTextView.text = bicycleData["description"] as? String
+        let bikeImageUIimage = bicycleData["image"] as! String
         let bikeImageUIimage1 = UIImage(named: bikeImageUIimage)
         bicycleUIImage.image = bikeImageUIimage1
         
@@ -46,10 +43,10 @@ class ProductDetailsViewController: UIViewController {
         
         // code to send order to backend server in Parse
         var cartItem = PFObject(className: "Cart")
-        cartItem["modelName"] = bicycleData["bikeModelText"]
-        cartItem["brandName"] = bicycleData["bikeBrandNameText"]
+        cartItem["modelName"] = bicycleData["modelName"]
+        cartItem["brandName"] = bicycleData["brandName"]
         //        cartItem["username"] = PFUser.currentUser()
-        cartItem["price"] = bicycleData["bikePriceText"]
+        cartItem["price"] = bicycleData["price"]
         cartItem.saveInBackgroundWithBlock { (Success: Bool, error: NSError?) -> Void in
             
             if error == nil {

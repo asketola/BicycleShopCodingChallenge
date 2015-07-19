@@ -13,7 +13,7 @@ class CheckoutPageViewController: UIViewController {
     
     
     // thoerietically we could use this bicycle data on this page to show what the user bought/is in his cart. 
-    var bicycleDataCheckout = NSDictionary()
+    var bicycleDataCheckout: PFObject!
 
     override func viewDidLoad() {
         super.viewDidLoad()
