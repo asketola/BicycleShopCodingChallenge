@@ -72,18 +72,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
             PFUser.logInWithUsernameInBackground(username, password: password, block: { (user, error) -> Void in
                 self.actInd.stopAnimating()
                 if ((user) != nil) {
-                    var alert = UIAlertController(title: "Success", message: "Logged In", preferredStyle: .Alert)
+                    println("We had success logging in")
+                    var alertSuccess = UIAlertController(title: "Success", message: "Logged In", preferredStyle: .Alert)
                     let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { alertAction in self.performSegueWithIdentifier("SHOW_BIKES_FOR_SALE", sender: self)
                     })
 //                    let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
 
-                    alert.addAction(OKAction)
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    alertSuccess.addAction(OKAction)
+                    self.presentViewController(alertSuccess, animated: true, completion: nil)
                 } else {
-                    var alert = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .Alert)
+                    var alertFail = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .Alert)
                     let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                    alert.addAction(OKAction)
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    alertFail.addAction(OKAction)
+                    self.presentViewController(alertFail, animated: true, completion: nil)
                 } // close else
             })
         }
@@ -95,6 +96,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+// MARK: Code for Keyboard mitigation
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField == usernameTextField {
             passwordTextField.becomeFirstResponder()

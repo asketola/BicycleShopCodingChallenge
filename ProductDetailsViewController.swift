@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class ProductDetailsViewController: UIViewController {
     
@@ -42,22 +43,37 @@ class ProductDetailsViewController: UIViewController {
     
 
     @IBAction func addToCartButtonPressed(sender: AnyObject) {
-        // code to send order to backend server
         
-        
-        let checkoutAlertController = UIAlertController(title: "Congratulations", message: "Your bike has been added to your cart", preferredStyle: .Alert)
-        let shopAction = UIAlertAction(title: "Keep Shopping", style: UIAlertActionStyle.Default) { alertAction in self.performSegueWithIdentifier("BACK_TO_ALL_BIKES", sender: self)
-            // should take you back to all bikes page
-            println("cancel button pressed")
+        // code to send order to backend server in Parse
+        var cartItem = PFObject(className: "Cart")
+        cartItem["modelName"] = bicycleData["bikeModelText"]
+        cartItem["brandName"] = bicycleData["bikeBrandNameText"]
+        //        cartItem["username"] = PFUser.currentUser()
+        cartItem["price"] = bicycleData["bikePriceText"]
+        cartItem.saveInBackgroundWithBlock { (Success: Bool, error: NSError?) -> Void in
+            
+            if error == nil {
+                println("Successfully added to cart in Parse")
+                let checkoutAlertController = UIAlertController(title: "Congratulations!", message: "Your bike has been added to your cart", preferredStyle: .Alert)
+                let shopAction = UIAlertAction(title: "Keep Shopping", style: UIAlertActionStyle.Default) { alertAction in self.performSegueWithIdentifier("BACK_TO_ALL_BIKES", sender: self)
+                    // should take you back to all bikes page
+                    println("cancel button pressed")
+                }
+                let checkoutAction = UIAlertAction(title: "Check-out", style: UIAlertActionStyle.Cancel) { action in self.performSegueWithIdentifier("SHOW_CHECKOUT", sender: self)
+                    // should take you to a checkout page
+                    println("ok action button pressed")
+                }
+                
+                checkoutAlertController.addAction(shopAction)
+                checkoutAlertController.addAction(checkoutAction)
+                self.presentViewController(checkoutAlertController, animated: true, completion: nil)
+            } else {
+                let errorAlertController = UIAlertController(title: "Error Saving to Cart", message: "Error: \(error)", preferredStyle: .Alert)
+                let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                errorAlertController.addAction(OKAction)
+                self.presentViewController(errorAlertController, animated: true, completion: nil)
+            }
         }
-        let checkoutAction = UIAlertAction(title: "Check-out", style: UIAlertActionStyle.Cancel) { action in self.performSegueWithIdentifier("SHOW_CHECKOUT", sender: self)
-            // should take you to a checkout page
-            println("ok action button pressed")
-        }
-        
-        checkoutAlertController.addAction(shopAction)
-        checkoutAlertController.addAction(checkoutAction)
-        self.presentViewController(checkoutAlertController, animated: true, completion: nil)
    }
     
         override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
