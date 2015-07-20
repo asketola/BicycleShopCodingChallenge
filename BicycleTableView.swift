@@ -67,10 +67,13 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
         cell.bikeBrandNameText!.text = object["brandName"] as? String
         cell.bikeModelText!.text = object["modelName"] as? String
         cell.bikepriceText!.text = object["price"] as? String
+        
+        // Placeholder bike to show while the images load
         let bikeImageUIimage = "bike-20clip-20art-yioe4EMpT.png"
         let bikeImageUIimage1 = UIImage(named: bikeImageUIimage)
         cell.bikeImage.image = bikeImageUIimage1
         
+        // Lazily load the images in the cells
         let bikePicture = object["bikeImage"] as! PFFile
         bikePicture.getDataInBackgroundWithBlock { (imageData, error) -> Void in
             if (error == nil) {
