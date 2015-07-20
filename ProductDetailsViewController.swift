@@ -17,12 +17,16 @@ class ProductDetailsViewController: UIViewController {
     @IBOutlet weak var bicyclePriceText: UILabel!
     @IBOutlet weak var productDescriptionTextView: UITextView!
     
+    // the Parse object we passed from the previous view controller
     var bicycleData: PFObject!
+    
+    // Activity spinner while we wait for Parse to add an item to the cart
+    var actInd: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 105)) as UIActivityIndicatorView
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // loads our data from the Parse Object
         brandNameText.text = bicycleData["brandName"] as? String
         bicycleModelText.text = bicycleData["modelName"] as? String
         bicyclePriceText.text = bicycleData["price"] as? String
@@ -31,17 +35,25 @@ class ProductDetailsViewController: UIViewController {
         let bikeImageUIimage1 = UIImage(named: bikeImageUIimage)
         bicycleUIImage.image = bikeImageUIimage1
         
+        // Activity spinner while we wait for Parse to add our item to the cart
+        self.actInd.center = self.view.center
+        self.actInd.hidesWhenStopped = true
+        self.actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
+        
+        view.addSubview(self.actInd)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
     @IBAction func addToCartButtonPressed(sender: AnyObject) {
         
-        // code to send order to backend server in Parse
+        // starts the activity spinner
+        self.actInd.startAnimating()
+        
+        // code to send the user's order to backend server in Parse as an object
         var cartItem = PFObject(className: "Cart")
         cartItem["modelName"] = bicycleData["modelName"]
         cartItem["brandName"] = bicycleData["brandName"]
@@ -53,19 +65,18 @@ class ProductDetailsViewController: UIViewController {
                 println("Successfully added to cart in Parse")
                 let checkoutAlertController = UIAlertController(title: "Congratulations!", message: "Your bike has been added to your cart", preferredStyle: .Alert)
                 let shopAction = UIAlertAction(title: "Keep Shopping", style: UIAlertActionStyle.Default) { alertAction in self.performSegueWithIdentifier("BACK_TO_ALL_BIKES", sender: self)
-                    // should take you back to all bikes page
-                    println("cancel button pressed")
+                    // takes you back to all bikes page
                 }
                 let checkoutAction = UIAlertAction(title: "Check-out", style: UIAlertActionStyle.Cancel) { action in self.performSegueWithIdentifier("SHOW_CHECKOUT", sender: self)
-                    // should take you to a checkout page
-                    println("ok action button pressed")
+                    // takes you to a checkout page
                 }
                 
                 checkoutAlertController.addAction(shopAction)
                 checkoutAlertController.addAction(checkoutAction)
                 self.presentViewController(checkoutAlertController, animated: true, completion: nil)
             } else {
-                let errorAlertController = UIAlertController(title: "Error Saving to Cart", message: "Error: \(error)", preferredStyle: .Alert)
+                // Alert the user that something went wrong with adding the item to the cart
+                let errorAlertController = UIAlertController(title: "Error Saving to Cart", message: "Your item was not added to the cart. \n Error: \(error)", preferredStyle: .Alert)
                 let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 errorAlertController.addAction(OKAction)
                 self.presentViewController(errorAlertController, animated: true, completion: nil)
@@ -74,7 +85,7 @@ class ProductDetailsViewController: UIViewController {
    }
     
         override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-            println("We got here")
+            // manages the segues
             if segue.identifier == "BACK_TO_ALL_BIKES" {
                 let detailedVC = segue.destinationViewController as! BicycleTableView
                 // pass something here if necessary

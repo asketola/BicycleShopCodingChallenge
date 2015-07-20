@@ -17,17 +17,23 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     
+    // Activity spinner while we wait for Parse to check login
     var actInd: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 105)) as UIActivityIndicatorView
+    
+    // For keyboard management
     var keyboardHeight: CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // For the opening misty-styled animation loading
         self.openingMountainBikeImage.alpha = 0
         self.bicycleShopNameText.alpha = 0
         self.usernameTextField.alpha = 0
         self.passwordTextField.alpha = 0
         self.loginButton.alpha = 0
         
+        // Activity spinner while we wait for Parse to check login
         self.actInd.center = self.view.center
         self.actInd.hidesWhenStopped = true
         self.actInd.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.Gray
@@ -38,9 +44,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        // For keyboard management
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
         
+        // For the opening misty-styled animation loading
         UIView.animateWithDuration(2.0, animations: { () -> Void in
             self.openingMountainBikeImage.alpha = 1.0
             self.bicycleShopNameText.alpha = 1.0
@@ -52,40 +60,36 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     @IBAction func loginButtonPressed(sender: AnyObject) {
-        // code to send login to Parse servers
+        // Code to send the user's login info to the Parse servers
         var username = self.usernameTextField.text
         var password = self.passwordTextField.text
         
         if (count(username.utf16) < 4 || count(password.utf16) < 5) {
             
+            // Alert to notify the user there was a login failure (too short inputs)
             var alert = UIAlertController(title: "Invalid", message: "Username must be greater than 4 and Password must be greater than 5.", preferredStyle: .Alert)
             let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alert.addAction(OKAction)
             self.presentViewController(alert, animated: true, completion: nil)
             
         } else {
+            // Starts the activity spinner
             self.actInd.startAnimating()
             PFUser.logInWithUsernameInBackground(username, password: password, block: { (user, error) -> Void in
                 self.actInd.stopAnimating()
                 if ((user) != nil) {
                     println("We had success logging in")
-                    var alertSuccess = UIAlertController(title: "Success", message: "Logged In", preferredStyle: .Alert)
-                    let OKAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { alertAction in self.performSegueWithIdentifier("SHOW_BIKES_FOR_SALE", sender: self)
-                    })
-//                    let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-
-                    alertSuccess.addAction(OKAction)
-                    self.presentViewController(alertSuccess, animated: true, completion: nil)
+                    self.performSegueWithIdentifier("SHOW_BIKES_FOR_SALE", sender: self)
                 } else {
-                    var alertFail = UIAlertController(title: "Error", message: "\(error)", preferredStyle: .Alert)
+                    // Alert to notify the user there was a login failure (incorrect username or password)
+                    var alertFail = UIAlertController(title: "Error", message: "The username or password is incorrect", preferredStyle: .Alert)
                     let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alertFail.addAction(OKAction)
                     self.presentViewController(alertFail, animated: true, completion: nil)
-                } // close else
+                }
             })
         }
     }
@@ -97,8 +101,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-// MARK: Code for Keyboard mitigation
+// MARK: Code for Keyboard management
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // Releases the keyboard when you hit return or moves it to the next textField
         if textField == usernameTextField {
             passwordTextField.becomeFirstResponder()
         }else {
@@ -108,17 +113,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        // Releases the keyboard if the user touches outside the textfields or keyboard
         usernameTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func keyboardWillShow(notification: NSNotification) {
+        // Assigns the keyboard height and initiates the animation
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
                 keyboardHeight = keyboardSize.height
@@ -128,12 +134,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func keyboardWillHide(notification: NSNotification) {
+        // Lowers the texfields
         self.animateTextField(false)
     }
     
     func animateTextField(up: Bool) {
+        // Animates the texFields to move up/down to make room for the keyboard
         var movement = (up ? -keyboardHeight : keyboardHeight)
-        
         UIView.animateWithDuration(0.3, animations: {
             self.view.frame = CGRectOffset(self.view.frame, 0, movement)
         })

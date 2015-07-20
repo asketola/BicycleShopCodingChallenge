@@ -16,16 +16,19 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @IBOutlet weak var typesOfBikesTableView: UITableView!
     
+    // Holds all the bike objects we get from the backend server Parse
     var bicycleObjects: NSMutableArray! = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchAllObjects()
+        fetchAllBikes()
         
+        // For the misty-styled animation loading
         self.storeNameText.alpha = 0
         self.storeBikeTypeLabel.alpha = 0
         self.typesOfBikesTableView.alpha = 0
         
+        // For our custom cell
         var nib = UINib(nibName: "BicycleTableViewCell", bundle: nil)
         typesOfBikesTableView.registerNib(nib, forCellReuseIdentifier: "cell")
         
@@ -37,6 +40,7 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        // For the misty-styled animation loading
         UIView.animateWithDuration(1.0, animations: { () -> Void in
         self.storeNameText.alpha = 1.0
         self.storeBikeTypeLabel.alpha = 1.0
@@ -48,7 +52,6 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,7 +62,6 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
         let cell:BicycleTableViewCell = self.typesOfBikesTableView.dequeueReusableCellWithIdentifier("cell") as! BicycleTableViewCell
         
         var object: PFObject = self.bicycleObjects.objectAtIndex(indexPath.row) as! PFObject
-        println("from cellforRowAtIndexPath object: \(object)")
         
         cell.bikeBrandNameText!.text = object["brandName"] as? String
         cell.bikeModelText!.text = object["modelName"] as? String
@@ -77,38 +79,34 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("You selected a cell #\(indexPath.row)!")
+        // Lets the user go to a detailed description of the bike selected
         performSegueWithIdentifier("SHOW_BIKE_DETAIL", sender: self)
     }
     
-    
-    func fetchAllObjects() {
-        //        PFObject.unpinAllObjectsInBackgroundWithBlock(nil)
+    func fetchAllBikes() {
+        // This is the query we send to Parse to get all the bikes that the shop sells
         var query: PFQuery = PFQuery(className: "Bicycle")
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            
+        
             if error == nil {
+                // Each bike is an object so we add the object to the global array we defined
                 var temp: NSArray = objects as AnyObject! as! NSArray
                 self.bicycleObjects = temp.mutableCopy() as! NSMutableArray
-                self.typesOfBikesTableView.reloadData()
                 
+                // reloads the tableView with the new data
+                self.typesOfBikesTableView.reloadData()
             }
-            
         }
     }
 
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("We got to the prepare for Segue")
             if segue.identifier == "SHOW_BIKE_DETAIL" {
-                
             let indexPath = self.typesOfBikesTableView.indexPathForSelectedRow()!
             var object: PFObject = self.bicycleObjects.objectAtIndex(indexPath.row) as! PFObject
             let detailedVC = segue.destinationViewController as! ProductDetailsViewController
             detailedVC.bicycleData = object
-      }
+        }
     }
 
 

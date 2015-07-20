@@ -12,7 +12,7 @@ import Parse
 class CheckoutPageViewController: UIViewController {
     
     
-    // thoerietically we could use this bicycle data on this page to show what the user bought/is in his cart. 
+    // theorietically we could use this bicycle data on this page to show what the user bought/is in his cart and populate that page
     var bicycleDataCheckout: PFObject!
 
     override func viewDidLoad() {
@@ -27,17 +27,8 @@ class CheckoutPageViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     @IBAction func logoutParseUser(sender: AnyObject) {
+        // theoretically the user would logout after they checked out
         PFUser.logOut()
         println("We logged out the user")
     }
