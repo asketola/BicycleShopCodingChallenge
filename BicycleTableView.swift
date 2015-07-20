@@ -18,6 +18,7 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     // Holds all the bike objects we get from the backend server Parse
     var bicycleObjects: NSMutableArray! = NSMutableArray()
+    var bicycleImages: NSMutableArray! = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,12 +67,16 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
         cell.bikeBrandNameText!.text = object["brandName"] as? String
         cell.bikeModelText!.text = object["modelName"] as? String
         cell.bikepriceText!.text = object["price"] as? String
+        let bikeImageUIimage = "bike-20clip-20art-yioe4EMpT.png"
+        let bikeImageUIimage1 = UIImage(named: bikeImageUIimage)
+        cell.bikeImage.image = bikeImageUIimage1
         
         let bikePicture = object["bikeImage"] as! PFFile
         bikePicture.getDataInBackgroundWithBlock { (imageData, error) -> Void in
             if (error == nil) {
                 let image = UIImage(data:imageData!)
                 cell.bikeImage.image = image
+                self.bicycleImages.addObject(image!)
             }
         }
         return cell
@@ -104,8 +109,10 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
             if segue.identifier == "SHOW_BIKE_DETAIL" {
             let indexPath = self.typesOfBikesTableView.indexPathForSelectedRow()!
             var object: PFObject = self.bicycleObjects.objectAtIndex(indexPath.row) as! PFObject
+            var objectImage: UIImage = self.bicycleImages.objectAtIndex(indexPath.row) as! UIImage
             let detailedVC = segue.destinationViewController as! ProductDetailsViewController
             detailedVC.bicycleData = object
+            detailedVC.bicycleDataImage = objectImage
         }
     }
 

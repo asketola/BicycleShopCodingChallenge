@@ -19,6 +19,7 @@ class ProductDetailsViewController: UIViewController {
     
     // the Parse object we passed from the previous view controller
     var bicycleData: PFObject!
+    var bicycleDataImage: UIImage!
     
     // Activity spinner while we wait for Parse to add an item to the cart
     var actInd: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 105)) as UIActivityIndicatorView
@@ -31,9 +32,7 @@ class ProductDetailsViewController: UIViewController {
         bicycleModelText.text = bicycleData["modelName"] as? String
         bicyclePriceText.text = bicycleData["price"] as? String
         productDescriptionTextView.text = bicycleData["description"] as? String
-        let bikeImageUIimage = bicycleData["image"] as! String
-        let bikeImageUIimage1 = UIImage(named: bikeImageUIimage)
-        bicycleUIImage.image = bikeImageUIimage1
+        bicycleUIImage.image = bicycleDataImage
         
         // Activity spinner while we wait for Parse to add our item to the cart
         self.actInd.center = self.view.center
@@ -62,6 +61,7 @@ class ProductDetailsViewController: UIViewController {
         cartItem.saveInBackgroundWithBlock { (Success: Bool, error: NSError?) -> Void in
             
             if error == nil {
+                self.actInd.stopAnimating()
                 println("Successfully added to cart in Parse")
                 let checkoutAlertController = UIAlertController(title: "Congratulations!", message: "Your bike has been added to your cart", preferredStyle: .Alert)
                 let shopAction = UIAlertAction(title: "Keep Shopping", style: UIAlertActionStyle.Default) { alertAction in self.performSegueWithIdentifier("BACK_TO_ALL_BIKES", sender: self)

@@ -202,8 +202,8 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Not Santa Cruz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuQ-aV-DDq">
-                                <rect key="frame" x="228" y="72" width="146" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not Santa Cruz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuQ-aV-DDq">
+                                <rect key="frame" x="227" y="72" width="146" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Q9z-cx-7pV"/>
                                 </constraints>
@@ -211,8 +211,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chameleon-web_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="KOV-GG-zLF">
-                                <rect key="frame" x="-500" y="104" width="1600" height="191"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KOV-GG-zLF">
+                                <rect key="frame" x="16" y="104" width="568" height="191"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="KOV-GG-zLF" secondAttribute="height" multiplier="207:80" constant="-119.02499999999998" id="Fg2-cQ-Jpm"/>
                                 </constraints>
@@ -255,6 +255,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pBU-Lp-X0b" firstAttribute="leading" secondItem="0p0-Kf-a3d" secondAttribute="leadingMargin" id="79O-aH-CFy"/>
+                            <constraint firstItem="KOV-GG-zLF" firstAttribute="leading" secondItem="0p0-Kf-a3d" secondAttribute="leadingMargin" id="AfD-0a-1MS"/>
                             <constraint firstItem="ljD-TR-Q2U" firstAttribute="top" secondItem="pBU-Lp-X0b" secondAttribute="bottom" constant="8" id="Ec8-UL-kzy"/>
                             <constraint firstAttribute="centerY" secondItem="KOV-GG-zLF" secondAttribute="centerY" multiplier="1.5" constant="1" id="Il6-M4-5mX"/>
                             <constraint firstItem="ynw-PR-cq7" firstAttribute="top" secondItem="fnh-AV-E79" secondAttribute="bottom" id="MVt-r8-Dsm"/>
@@ -264,6 +265,7 @@
                             <constraint firstItem="E9k-CK-knj" firstAttribute="top" secondItem="ljD-TR-Q2U" secondAttribute="bottom" constant="8" id="br5-dB-01Y"/>
                             <constraint firstAttribute="centerX" secondItem="xuQ-aV-DDq" secondAttribute="centerX" id="cMC-3A-cBX"/>
                             <constraint firstItem="pBU-Lp-X0b" firstAttribute="trailing" secondItem="0p0-Kf-a3d" secondAttribute="trailingMargin" id="dby-he-zIX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="KOV-GG-zLF" secondAttribute="trailing" id="lvg-sJ-La4"/>
                             <constraint firstItem="KOV-GG-zLF" firstAttribute="top" secondItem="xuQ-aV-DDq" secondAttribute="bottom" constant="8" id="ouX-Wn-sq9"/>
                             <constraint firstItem="pBU-Lp-X0b" firstAttribute="top" secondItem="W5D-M4-A0J" secondAttribute="bottom" constant="8" id="pjg-6G-I4X"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ynw-PR-cq7" secondAttribute="trailing" constant="-16" id="pty-vL-IhO"/>
@@ -333,9 +335,8 @@
     </scenes>
     <resources>
         <image name="PNWbike.jpg" width="600" height="800"/>
-        <image name="chameleon-web_0.png" width="1600" height="1349"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lI3-YN-0ei"/>
+        <segue reference="ghs-cp-hMJ"/>
     </inferredMetricsTieBreakers>
 </document>

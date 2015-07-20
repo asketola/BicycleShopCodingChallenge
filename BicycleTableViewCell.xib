@@ -15,13 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Santa Cruz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QV2-No-C9u">
-                        <rect key="frame" x="166" y="8" width="80" height="18"/>
-                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="15"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chameleon XC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5E-EF-FQ1">
-                        <rect key="frame" x="166" y="34" width="105" height="18"/>
+                        <rect key="frame" x="166" y="10" width="80" height="18"/>
                         <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -32,41 +26,46 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chameleon-web_0.png" translatesAutoresizingMaskIntoConstraints="NO" id="JaJ-ZE-XpB">
-                        <rect key="frame" x="8" y="8" width="150" height="100"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kV3-Bt-EhT">
+                        <rect key="frame" x="8" y="10" width="150" height="100"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="100" id="62r-HY-gVS"/>
-                            <constraint firstAttribute="width" constant="150" id="QGg-ab-RpP"/>
+                            <constraint firstAttribute="width" constant="150" id="6xA-gf-v3t"/>
+                            <constraint firstAttribute="height" constant="100" id="OZi-cp-zZM"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chameleon XC" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X5E-EF-FQ1">
+                        <rect key="frame" x="166" y="36" width="105" height="18"/>
+                        <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="15"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="X5E-EF-FQ1" firstAttribute="leading" secondItem="JaJ-ZE-XpB" secondAttribute="trailing" constant="8" id="8mc-yr-quz"/>
-                    <constraint firstItem="QV2-No-C9u" firstAttribute="top" secondItem="JaJ-ZE-XpB" secondAttribute="top" id="FEo-7Y-XfE"/>
+                    <constraint firstItem="kV3-Bt-EhT" firstAttribute="top" secondItem="huh-yc-OC2" secondAttribute="top" constant="2" id="C6j-lX-nBH"/>
                     <constraint firstItem="X5E-EF-FQ1" firstAttribute="top" secondItem="QV2-No-C9u" secondAttribute="bottom" constant="8" id="FmC-Ml-oxb"/>
-                    <constraint firstItem="QV2-No-C9u" firstAttribute="leading" secondItem="JaJ-ZE-XpB" secondAttribute="trailing" constant="8" id="Sop-0S-0hi"/>
+                    <constraint firstItem="kV3-Bt-EhT" firstAttribute="top" secondItem="QV2-No-C9u" secondAttribute="top" id="Q2r-V6-YBd"/>
+                    <constraint firstItem="QV2-No-C9u" firstAttribute="leading" secondItem="kV3-Bt-EhT" secondAttribute="trailing" constant="8" id="RKz-m7-zHf"/>
+                    <constraint firstItem="X5E-EF-FQ1" firstAttribute="leading" secondItem="kV3-Bt-EhT" secondAttribute="trailing" constant="8" id="TEa-hy-ESx"/>
                     <constraint firstItem="huh-yc-OC2" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="aAA-bH-GF0"/>
-                    <constraint firstItem="JaJ-ZE-XpB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bwP-9L-CCA"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="JaJ-ZE-XpB" secondAttribute="bottom" id="f7h-rt-ebH"/>
-                    <constraint firstItem="JaJ-ZE-XpB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="m86-tf-VTX"/>
+                    <constraint firstAttribute="centerY" secondItem="kV3-Bt-EhT" secondAttribute="centerY" constant="-0.5" id="atc-KC-jUC"/>
+                    <constraint firstItem="kV3-Bt-EhT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ecq-Dv-cB4"/>
                     <constraint firstItem="huh-yc-OC2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="szd-6Y-jbx"/>
+                    <constraint firstItem="kV3-Bt-EhT" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="yd2-oM-MSk"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
-                        <exclude reference="f7h-rt-ebH"/>
+                        <exclude reference="ecq-Dv-cB4"/>
+                        <exclude reference="szd-6Y-jbx"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="bikeBrandNameText" destination="QV2-No-C9u" id="S1b-df-TjA"/>
-                <outlet property="bikeImage" destination="JaJ-ZE-XpB" id="nVG-8o-F0b"/>
+                <outlet property="bikeImage" destination="kV3-Bt-EhT" id="dYB-DH-1PZ"/>
                 <outlet property="bikeModelText" destination="X5E-EF-FQ1" id="kFk-kY-Qqb"/>
                 <outlet property="bikepriceText" destination="huh-yc-OC2" id="iKS-6A-6RC"/>
             </connections>
-            <point key="canvasLocation" x="513.5" y="469"/>
+            <point key="canvasLocation" x="15.5" y="431"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="chameleon-web_0.png" width="1600" height="1349"/>
-    </resources>
 </document>
