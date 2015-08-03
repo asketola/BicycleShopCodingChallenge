@@ -19,7 +19,7 @@ class CheckoutPageViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBOutlet weak var itemsInCartTableView: UITableView!
 
-    // theorietically we could use this bicycle data on this page to show what the user bought/is in his cart and populate that page
+    // to show what the user bought/is in his cart and populate the page
     var bicycleDataCheckout: PFObject!
     var cartObjects: NSMutableArray! = NSMutableArray()
     var bicycleSumArray: [Int] = Array()
@@ -69,9 +69,12 @@ class CheckoutPageViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func addUpSum() {
-        // add up the sum of the items in the person's cart and set the Label
+        // add up the sum of the items in the person's cart and set the Label with the formatted number
         var sumPrice = bicycleSumArray.reduce(0,combine: +)
-        self.totalPriceLabel!.text = "Total: $\(sumPrice)"
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        var formattedSumPrice = numberFormatter.stringFromNumber(sumPrice)!
+        self.totalPriceLabel!.text = "Total: $\(formattedSumPrice)"
     }
     
     func bicycleSoldParseUpdate() {
@@ -116,6 +119,9 @@ class CheckoutPageViewController: UIViewController, UITableViewDataSource, UITab
         
         // hide the checkout button to prevent the user from re-buying the product
         self.checkoutButton.hidden = true
+        
+        // could add ApplePay here - perhaps future addition
+        // ApplePay code
         
         // Alert to notify the user their items have been bought
         var alert = UIAlertController(title: "Items Purchased!", message: "Congratulations! \n You are the proud new owner of a Santa Cruz Bicycle!", preferredStyle: .Alert)
