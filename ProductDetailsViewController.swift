@@ -53,11 +53,14 @@ class ProductDetailsViewController: UIViewController {
         self.actInd.startAnimating()
         
         // code to send the user's order to backend server in Parse as an object
+        var currentUser = PFUser.currentUser()!
         var cartItem = PFObject(className: "Cart")
         cartItem["modelName"] = bicycleData["modelName"]
         cartItem["brandName"] = bicycleData["brandName"]
-        //        cartItem["username"] = PFUser.currentUser()
         cartItem["price"] = bicycleData["price"]
+        cartItem["priceNumber"] = bicycleData["priceNumber"]
+        cartItem["CheckedOut"] = false
+        cartItem.setObject(currentUser, forKey: "user")
         cartItem.saveInBackgroundWithBlock { (Success: Bool, error: NSError?) -> Void in
             
             if error == nil {
