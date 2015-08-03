@@ -94,7 +94,7 @@ class ProductDetailsViewController: UIViewController {
                 // pass something here if necessary
             } else if segue.identifier == "SHOW_CHECKOUT" {
                 let checkoutVC = segue.destinationViewController as! CheckoutPageViewController
-                checkoutVC.bicycleDataCheckout = bicycleData
+//                checkoutVC.bicycleDataCheckout = bicycleData
             } else if segue.identifier == "BACK_TO_BIKES" {
                 let flipbackVC = segue.destinationViewController as! BicycleTableView
             }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Bolts
 
 class CheckoutPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -74,23 +75,27 @@ class CheckoutPageViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func bicycleSoldParseUpdate() {
+        // get the number of items in the user's cart
+        var numberOfItemsInCart = cartObjects.count - 1
         
-        var query: PFQuery = PFQuery(className: "Cart")
-        var user = PFUser.currentUser()!
-        query.whereKey("user", equalTo: user)
-        query.whereKey("CheckedOut", equalTo: false)
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if error == nil {
-//                println("Success")
-            } else {
-                // Sets bool to false, so that items bought won't show back up in the cart next time
-//                var object: PFObject
-//                for object in objects {
-//                    object["CheckedOut"] =  true as Bool
-//                    object.saveInBackground
-//                    }
-                }
+        // get the objectID of each item
+        for object in cartObjects{
+            for i in 0...numberOfItemsInCart {
+        var object: PFObject = self.cartObjects.objectAtIndex(i) as! PFObject
+                var objectID: String = object.objectId!
+                
+        // save to the backend that the items have been purchased, updating that column
+        var query = PFQuery(className: "Cart")
+                query.getObjectInBackgroundWithId("\(objectID)", block: { (cart: PFObject?, error: NSError?) -> Void in
+                    if error != nil {
+                        println("error \(error)")
+                    } else if let cart = cart {
+                        cart["CheckedOut"] = true
+                        cart.saveInBackground()
+                    }
+                })
             }
+        }
     }
 
     override func didReceiveMemoryWarning() {
