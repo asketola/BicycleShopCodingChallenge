@@ -41,6 +41,10 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        if (PFUser.currentUser() == nil) {
+            performSegueWithIdentifier("SHOW_LOGIN", sender: self)
+        }
+        
         // For the misty-styled animation loading
         UIView.animateWithDuration(1.0, animations: { () -> Void in
         self.storeNameText.alpha = 1.0

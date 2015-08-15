@@ -16,7 +16,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    
+    @IBOutlet weak var signUpButton: UIButton!
     // Activity spinner while we wait for Parse to check login
     var actInd: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(0, 0, 150, 105)) as UIActivityIndicatorView
     
@@ -32,6 +32,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.usernameTextField.alpha = 0
         self.passwordTextField.alpha = 0
         self.loginButton.alpha = 0
+        self.signUpButton.alpha = 0
         
         // Activity spinner while we wait for Parse to check login
         self.actInd.center = self.view.center
@@ -55,6 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.usernameTextField.alpha = 1.0
             self.passwordTextField.alpha = 1.0
             self.loginButton.alpha = 1.0
+            self.signUpButton.alpha = 1.0
         })
     }
 
@@ -68,12 +70,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         var password = self.passwordTextField.text
         
         if (count(username.utf16) < 4 || count(password.utf16) < 5) {
-            
             // Alert to notify the user there was a login failure (too short inputs)
-            var alert = UIAlertController(title: "Invalid", message: "Username must be greater than 4 and Password must be greater than 5.", preferredStyle: .Alert)
-            let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alert.addAction(OKAction)
-            self.presentViewController(alert, animated: true, completion: nil)
+            usernamePasswordAlertController()
             
         } else {
             // Starts the activity spinner
@@ -85,6 +83,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                     self.performSegueWithIdentifier("SHOW_BIKES_FOR_SALE", sender: self)
                 } else {
                     // Alert to notify the user there was a login failure (incorrect username or password)
+                    println("Why did we get to this alert")
                     var alertFail = UIAlertController(title: "Error", message: "The username or password is incorrect", preferredStyle: .Alert)
                     let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                     alertFail.addAction(OKAction)
@@ -92,6 +91,47 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
             })
         }
+    }
+    
+    
+    @IBAction func signUpButtonPressed(sender: AnyObject) {
+        // Code to send the user's login info to the Parse servers
+        var user = PFUser()
+        user.username = self.usernameTextField.text
+        user.password = self.passwordTextField.text
+        
+        println("We got to the signUpButtonPressed")
+        
+        if (count(user.username!.utf16) < 4 || count(user.password!.utf16) < 5) {
+            // Alert to notify the user there was a login failure (too short inputs)
+             println("We got to the signUpButtonPressed error alert")
+            usernamePasswordAlertController()
+        } else {
+            // Starts the activity spinner
+            self.actInd.startAnimating()
+            user.signUpInBackgroundWithBlock({ (succeeded: Bool, signupError: NSError?) -> Void in
+                self.actInd.stopAnimating()
+                
+                if succeeded == true {
+                    println("new user signed-up")
+                    self.performSegueWithIdentifier("SHOW_BIKES_FOR_SALE", sender: self)
+                } else {
+                    // Alert to notify the user there was a sign-up failure (incorrect username or password)
+                    var alertFail = UIAlertController(title: "Error", message: "Sign-up Faiure. \n Please try again \n \(signupError)", preferredStyle: .Alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alertFail.addAction(OKAction)
+                    self.presentViewController(alertFail, animated: true, completion: nil)
+                    }
+                })
+            }
+    } // close the signUpButtonPressed
+    
+    func usernamePasswordAlertController() {
+            // Alert to notify the user there was a login failure (too short inputs)
+            var alert = UIAlertController(title: "Invalid", message: "Username must be greater than 4 and Password must be greater than 5.", preferredStyle: .Alert)
+            let OKAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alert.addAction(OKAction)
+            self.presentViewController(alert, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ehh-F0-HaF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -25,7 +25,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="gyo-Qo-USe">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username/Email" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="gyo-Qo-USe">
                                 <rect key="frame" x="16" y="480" width="568" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
@@ -45,27 +45,27 @@
                                 <rect key="frame" x="16" y="69" width="568" height="403"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mXR-Oh-h0Z">
-                                <rect key="frame" x="16" y="556" width="568" height="36"/>
+                                <rect key="frame" x="16" y="556" width="280" height="36"/>
                                 <color key="backgroundColor" red="0.031927478878450585" green="0.2447538342988711" blue="0.22009095767646022" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="9HZ-u6-8m2"/>
-                                    <constraint firstAttribute="width" secondItem="mXR-Oh-h0Z" secondAttribute="height" multiplier="16:9" id="G2X-iB-cVy"/>
-                                    <constraint firstAttribute="width" constant="568" id="TKG-cR-4bD"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="0.090467664360609532" green="0.69351882798573983" blue="0.62363567645543438" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="9HZ-u6-8m2"/>
-                                        <exclude reference="G2X-iB-cVy"/>
-                                        <exclude reference="TKG-cR-4bD"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zAl-iC-1wy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfa-18-G04">
+                                <rect key="frame" x="304" y="556" width="280" height="36"/>
+                                <color key="backgroundColor" red="0.039215686274509803" green="0.18823529411764706" blue="0.16470588235294117" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="20"/>
+                                <state key="normal" title="Sign-up">
+                                    <color key="titleColor" red="0.090467664360000005" green="0.69351882799999998" blue="0.62363567649999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signUpButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dMc-7E-0Jk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -79,12 +79,16 @@
                             <constraint firstItem="ntp-dP-n1d" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Gtt-7a-KZf"/>
                             <constraint firstItem="mXR-Oh-h0Z" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Lgg-ny-ksf"/>
                             <constraint firstItem="1rQ-WP-E6T" firstAttribute="top" secondItem="ntp-dP-n1d" secondAttribute="bottom" constant="8" id="TWA-En-AqD"/>
-                            <constraint firstItem="mXR-Oh-h0Z" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Xim-C4-vdU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Tfa-18-G04" secondAttribute="bottom" constant="8" id="Tcx-ql-0Qn"/>
+                            <constraint firstItem="Tfa-18-G04" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="YaQ-Vp-Ziq"/>
                             <constraint firstItem="gyo-Qo-USe" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="bbg-uu-0jS"/>
                             <constraint firstItem="1rQ-WP-E6T" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cA8-G3-5jo"/>
+                            <constraint firstItem="Tfa-18-G04" firstAttribute="top" secondItem="YAP-2r-g9w" secondAttribute="bottom" constant="8" id="gFu-Oh-V1k"/>
                             <constraint firstItem="gyo-Qo-USe" firstAttribute="top" secondItem="1rQ-WP-E6T" secondAttribute="bottom" constant="8" id="irB-Zm-djR"/>
                             <constraint firstAttribute="centerX" secondItem="ntp-dP-n1d" secondAttribute="centerX" constant="-0.5" id="j9t-ua-ymf"/>
                             <constraint firstItem="YAP-2r-g9w" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="rao-Iw-7JR"/>
+                            <constraint firstItem="Tfa-18-G04" firstAttribute="leading" secondItem="mXR-Oh-h0Z" secondAttribute="trailing" constant="8" id="sEf-GI-Dj8"/>
+                            <constraint firstItem="Tfa-18-G04" firstAttribute="width" secondItem="mXR-Oh-h0Z" secondAttribute="width" id="vTE-PF-wmo"/>
                             <constraint firstItem="gyo-Qo-USe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="z8k-WX-1OP"/>
                         </constraints>
                     </view>
@@ -93,13 +97,14 @@
                         <outlet property="loginButton" destination="mXR-Oh-h0Z" id="MWr-g0-whd"/>
                         <outlet property="openingMountainBikeImage" destination="1rQ-WP-E6T" id="580-6t-cpg"/>
                         <outlet property="passwordTextField" destination="YAP-2r-g9w" id="bqb-SW-zPe"/>
+                        <outlet property="signUpButton" destination="Tfa-18-G04" id="mmK-M4-b8s"/>
                         <outlet property="usernameTextField" destination="gyo-Qo-USe" id="aY1-eG-3Y9"/>
                         <segue destination="ehh-F0-HaF" kind="presentation" identifier="SHOW_BIKES_FOR_SALE" id="lI3-YN-0ei"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-19" y="404"/>
+            <point key="canvasLocation" x="-112" y="461"/>
         </scene>
         <!--Bicycle Table View-->
         <scene sceneID="VIr-OW-vug">
@@ -169,6 +174,7 @@
                         <outlet property="storeBikeTypeLabel" destination="TmS-dM-zhs" id="3v6-U6-nk2"/>
                         <outlet property="storeNameText" destination="Frv-Gl-p3l" id="TgB-oC-0z9"/>
                         <outlet property="typesOfBikesTableView" destination="8Zf-Kk-wRe" id="Zru-YM-7pN"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="SHOW_LOGIN" id="HDo-iQ-tSe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fn2-fJ-TaU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -241,7 +247,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pBU-Lp-X0b">
                                 <rect key="frame" x="16" y="355" width="568" height="199"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter" family="American Typewriter" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -472,6 +478,7 @@
         <image name="PNWbike.jpg" width="600" height="800"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ghs-cp-hMJ"/>
+        <segue reference="lI3-YN-0ei"/>
+        <segue reference="HDo-iQ-tSe"/>
     </inferredMetricsTieBreakers>
 </document>
