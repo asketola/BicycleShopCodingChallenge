@@ -16,6 +16,8 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     @IBOutlet weak var typesOfBikesTableView: UITableView!
     
+    @IBOutlet weak var cartButton: UIButton!
+    
     // Holds all the bike objects we get from the backend server Parse
     var bicycleObjects: NSMutableArray! = NSMutableArray()
     var bicycleImages: NSMutableArray! = NSMutableArray()
@@ -28,6 +30,7 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.storeNameText.alpha = 0
         self.storeBikeTypeLabel.alpha = 0
         self.typesOfBikesTableView.alpha = 0
+        self.cartButton.alpha = 0
         
         // For our custom cell
         var nib = UINib(nibName: "BicycleTableViewCell", bundle: nil)
@@ -50,6 +53,7 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
         self.storeNameText.alpha = 1.0
         self.storeBikeTypeLabel.alpha = 1.0
         self.typesOfBikesTableView.alpha = 1.0
+        self.cartButton.alpha = 1.0
         })
     }
     
@@ -110,6 +114,11 @@ class BicycleTableView: UIViewController, UITableViewDelegate, UITableViewDataSo
             }
         }
     }
+    
+    @IBAction func showCartButtonPressed(sender: AnyObject) {
+        self.performSegueWithIdentifier("SHOW_CART", sender: self)
+    }
+    
 
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

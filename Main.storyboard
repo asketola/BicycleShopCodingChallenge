@@ -151,11 +151,26 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJ9-Be-dBz">
+                                <rect key="frame" x="559" y="56" width="25" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="Nhb-vi-Adg"/>
+                                    <constraint firstAttribute="height" constant="20" id="cjh-8p-joK"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="empty-cart-light.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="showCartButtonPressed:" destination="ehh-F0-HaF" eventType="touchUpInside" id="fhY-ld-qJl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.043137254901960784" green="0.14509803921568629" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="oGq-ve-e5e" firstAttribute="top" secondItem="8Zf-Kk-wRe" secondAttribute="bottom" constant="16" id="0Om-op-NF1"/>
+                            <constraint firstItem="MJ9-Be-dBz" firstAttribute="trailing" secondItem="VEF-6R-Ugb" secondAttribute="trailingMargin" id="61F-ca-goo"/>
                             <constraint firstItem="8Zf-Kk-wRe" firstAttribute="top" secondItem="TmS-dM-zhs" secondAttribute="bottom" constant="8" id="8Id-mg-i0A"/>
+                            <constraint firstItem="8Zf-Kk-wRe" firstAttribute="top" secondItem="MJ9-Be-dBz" secondAttribute="bottom" constant="8" id="8dK-Hs-Wr0"/>
                             <constraint firstAttribute="centerX" secondItem="Frv-Gl-p3l" secondAttribute="centerX" id="Fxh-as-yJN"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8Zf-Kk-wRe" secondAttribute="trailing" id="Ibv-SF-qZi"/>
                             <constraint firstItem="TmS-dM-zhs" firstAttribute="top" secondItem="Frv-Gl-p3l" secondAttribute="bottom" constant="4" id="Mjg-mO-87C"/>
@@ -171,10 +186,12 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="cartButton" destination="MJ9-Be-dBz" id="gcb-KQ-TdG"/>
                         <outlet property="storeBikeTypeLabel" destination="TmS-dM-zhs" id="3v6-U6-nk2"/>
                         <outlet property="storeNameText" destination="Frv-Gl-p3l" id="TgB-oC-0z9"/>
                         <outlet property="typesOfBikesTableView" destination="8Zf-Kk-wRe" id="Zru-YM-7pN"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="SHOW_LOGIN" id="HDo-iQ-tSe"/>
+                        <segue destination="dyM-AI-MHp" kind="show" identifier="SHOW_CART" id="UCh-aV-Uze"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fn2-fJ-TaU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -308,8 +325,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checkout Page! The End" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xf8-JQ-fYG">
-                                <rect key="frame" x="201" y="66" width="198" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checkout Page! " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xf8-JQ-fYG">
+                                <rect key="frame" x="235" y="66" width="130" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="Qnt-aK-bxM"/>
                                 </constraints>
@@ -476,9 +493,11 @@
     </scenes>
     <resources>
         <image name="PNWbike.jpg" width="600" height="800"/>
+        <image name="empty-cart-light.png" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lI3-YN-0ei"/>
+        <segue reference="UCh-aV-Uze"/>
+        <segue reference="dCW-27-NWw"/>
         <segue reference="HDo-iQ-tSe"/>
     </inferredMetricsTieBreakers>
 </document>

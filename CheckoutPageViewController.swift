@@ -27,6 +27,7 @@ class CheckoutPageViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         loadAllCartItems()
+        addUpSum()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
